@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+let a = [9,0,[1, [10, 11, 12],2,3],[[4,5,6],7,8]];
+let stack = []
+// 深度遍历，递归实现(实现数组展开成一纬数组)
+function breadFirstSerch (arr) {
+    for(let i=0; i < arr.length; i++) {
+        if (arr[i] instanceof Array) {
+            breadFirstSerch(arr[i]);
+        } else {
+            stack.push(arr[i])
+        }
+    }
+}
+breadFirstSerch(a)
+console.log(stack);
+
+function name() {
+    console.log(arguments);
+}
+//
+</script>

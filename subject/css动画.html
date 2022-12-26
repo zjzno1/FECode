@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css动画</title>
+</head>
+<style>
+    .a1 {
+        height: 100px;
+        background: red;
+        cursor: pointer;
+    }
+    .a2 {
+        /* display: none; */
+        animation: myfirst 5s;
+        -webkit-animation: myfirst 5s; 
+        position: relative;
+        z-index: 100;
+        width: 100%;
+        position: absolute;
+        /* transition: 300px 2s ease; */
+    }
+    @keyframes myfirst {
+        from { top: -200px}
+        to { top: 0}
+    }
+    .p1 {
+        padding: 15px;
+    }
+    .b1 {
+        background: blue;
+        height: 100px;
+    }
+</style>
+<body>
+    <div class="a1">
+
+    </div>
+    <div class="a2">
+        <p class="p1">asdfasdfas</p>
+        <p class="p1">asdfasdfas</p>
+        <p class="p1">asdfasdfas</p>
+        <p class="p1">asdfasdfas</p>
+        <p class="p1">asdfasdfas</p>
+    </div>
+    <div class="b1">
+
+    </div>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <style>
+        .container {
+            line-height: 30px;
+            text-align: center;
+            width: 100px;
+            position: relative;
+        }
+
+        .container:hover .sub {
+            max-height: 300px;
+        }
+
+        .sub {
+            position: absolute;
+            width: 100%;
+            transition: max-height .5s ease;
+            max-height: 0;
+            top: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        移过来
+        <ul class="sub">
+            <li>测试1</li>
+            <li>测试2</li>
+            <li>测试3</li>
+            <li>测试4</li>
+            <li>测试5</li>
+            <li>测试6</li>
+            <li>测试7</li>
+            <li>测试8</li>
+        </ul>
+    </div>
+    <div class="1">
+        asdfasdfasd
+    </div>
+</body>
+
+</html> -->

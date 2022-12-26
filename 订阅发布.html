@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  
+</script>
+<script>
+  let a = {
+    eventObj: {},
+    cacheArr: [],
+    emit: function (name, data) {
+      if (a.eventObj[name]) {
+        console.log(a.eventObj[name]);
+        debugger;
+        for (let i = 0; i < a.eventObj[name].length; i++) {
+          a.eventObj[name][i].call(null, data);
+        }
+      }
+    },
+    on: function (name, cb) {
+      // debugger;
+      // if (a.cacheArr.indexOf(name) > -1) {
+      //   for (let i = 0; i < a.cacheArr.length; i++) {
+      //     if (a.cacheArr.name === name) {
+      //       debugger;
+      //       cb.call(null, a.cacheArr[i].data);
+      //       if (!a.eventObj[name]) {
+      //         a.eventObj[name] = [cb];
+      //       } else {
+      //         a.eventObj[name].push(cb);
+      //       }
+      //       a.cacheArr.splice(i, 1);
+      //       i--;
+      //     }
+      //   }
+      //   return;
+      // }
+      
+      
+
+      if (!a.eventObj[name]) {
+        a.eventObj[name] = [cb];
+      } else {
+        a.eventObj[name].push(cb);
+      }
+      console.log(a.eventObj);
+      debugger;
+    },
+    once: function (name, data) {
+      if (a.eventObj[name]) {
+        for (let i = 0; i < a.eventObj[name].length; i++) {
+          a.eventObj[name][i].call(null, data);
+        }
+        delete a.eventObj[name];
+      }
+    },
+    deleteFn: function (name) {
+      if (a.eventObj[name]) {
+        delete a.eventObj[name];
+      }
+    },
+    initEmit: function (name, data) {
+      if (a.eventObj[name] === name) {
+        for (let i = 0; i < a.eventObj[name].length; i++) {
+          a.eventObj[name][i].call(null, data);
+        }
+      } else {
+        a.cacheArr.push = {
+          name: name,
+          data: data
+        }
+      }
+    }
+  }
+  // // call实现
+  // Function.prototype.myCall = function (_this) {
+  //   _this = _this || window;
+  //   if (typeof(_this) !== 'object' || _this === null) {
+  //     return _this;
+  //   }
+  //   let args = Array.form(arguments).slice(1);
+  //   _this.fn = this;
+  //   let reData = _this.fn(...args);
+  //   delete _this.fn;
+  //   return reData;
+  // }
+
+  // // apply实现
+  // Function.prototype.myApply = function (context) {
+  //   context = context || window;
+  //   if (typeof(context) !== 'object' || context === null) {
+  //     return context;
+  //   }
+  //   let args = Array.from(arguments).slice(1);
+  //   context.fn = this;
+  //   let reData = context.fn(args);
+  //   delete context.fn;
+  //   return reData;
+  // }
+
+  // bind实现
+  Function.prototype.bind = function (context) {
+    // context = context || window;
+    // if (typeof context !== 'object' || context === null) {
+    //   return context;
+    // }
+    if (typeof context !== 'function') {
+      return TypeError('Error');
+    }
+    _this = this;
+    let args = Array.from(arguments).slice(1);
+    
+    return function F() {
+      if (this instanceof F) {
+        return new this(...args, ...Array.from(arguments));
+      } else {
+        return _this.apply(context, args.concat(Array.from(arguments)));
+      }
+    }
+  }
+
+  a.on('test', function (a,b,c) {
+    console.log(111, a,b,c);
+  });
+  a.on('test', function (a,b,c) {
+    console.log(222, a,b,c);
+  });
+  setTimeout(() => {
+    a.emit('test', 1,2,3);
+  }, 1000);
+</script>

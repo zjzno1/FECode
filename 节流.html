@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+    <style>
+        html, body {
+            height: 5000px;
+        }
+    </style>
+</head>
+<body>
+    每隔一段时间执行一次
+</body>
+</html>
+<script>
+function a () {
+    console.log(1);
+}
+document.body.onscroll = jieliu(a);
+function jieliu (cb, during = 500) {
+    let timer = null;
+    let lastTime = new Date().getTime();
+    return () => {
+        let nowTime = new Date().getTime();
+        if (nowTime - lastTime < during) {
+            return;
+        }
+        lastTime = new Date().getTime();
+        timer = setTimeout(() => {
+            cb && cb();
+        }, during);
+    }
+}
+</script>

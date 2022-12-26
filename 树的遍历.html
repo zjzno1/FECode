@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    const tree = {
+	val:'a',
+	children:[
+		{
+			val:'b',
+			children:[
+				{val:'d',children:[]},
+				{val:'e',children:[]},
+			]
+		},
+		{
+			val:'c',
+			children:[
+				{val:'f',children:[]},
+				{val:'g',children:[]}
+			]
+		}
+	]
+}
+
+// // 深度优先遍历 DFS
+// const DFSFn = function (root) {
+// 	console.log(root.val);
+// 	root.children.forEach(element => {
+// 		DFSFn(element);
+// 	});
+// }
+
+// DFSFn(tree);
+
+// 广度优先遍历 BFS
+
+// function BFSFn (root) {
+// 	let arr = [root];
+// 	while (arr.length > 0) {
+// 		let o = arr.shift();
+// 		console.log(o.val);
+// 		o.children.forEach((item) => {
+// 			arr.push(item);
+// 		})
+// 	}
+// }
+
+// BFSFn(tree);
+</script>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js继承</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 每个构造函数(constructor)都有一个原型对象(prototype),原型对象都包含一个指向构造函数的指针,而实例(instance)都包含一个指向原型对象的内部指针
+    // 原型链: 一个对象的__proto__属性会指向他构造函数的protoType，额构造函数的
+
+    // 1 原型链继承
+
+    function fatherFn () {
+        this.name = 'father';
+    }
+    fatherFn.prototype.getName = function () {
+        console.log(this.name);
+    }
+
+    function childFn () {
+        this.name = 'child'
+    }
+    childFn.prototype = new fatherFn();
+
+    var childObj = new childFn();
+    console.log(childObj.getName());  // child
+
+    /**
+     *  缺点: 
+     *    1. 无法传参 
+     *    2. 所有实例都共用原型上的属性
+     * */
+
+    //  2. 盗用构造函数 (经典继承)
+    //  针对以上二点，在子类里调用父类构造函数来实现上下文的绑定，解决传参和原型属性共用问题
+
+    function FatherFn2 (name) {
+        this.name = name || 'father';
+    }
+
+    function Child1Fn (name) {
+        FatherFn2.call(this, name);
+    }
+
+    let child1 = new Child1Fn('child1');
+    let child2 = new Child1Fn('child2');
+
+    console.log('aaaaaaaa', child1.name, child2.name);
+    // 2. 组合式继承
+    function FatherFn3 (name) {
+        this.name = name || 'father';
+    }
+
+    function Child2Fn (name) {
+        FatherFn3.call(this, name);
+    }
+
+    Child2Fn.prototype = new FatherFn3();
+
+    // 原型继承
+
+    function FatherFn4 (o) {
+        function F () { };
+        F.prototype = o;
+        return new F();
+    }
+
+    let a = Object.create({}, {
+        a: {
+            value: 1,
+            writable: true
+        }
+    })
+
+    // 寄生式继承
+
+    function FatherFn5 (o) {
+        let clone = Object.create(o);
+        clone.sayHi = function () {
+            console.log('hi');
+        }
+        return clone;
+    }
+    let obj = {a: 1}
+    let child3 = FatherFn5(obj);
+    console.log(child3.a);
+    console.log(child3.sayHi());
+
+    // 寄生式组合继承
+    function inherit(Son, Father) {
+        const prototype = Object.create(Father.prototype) // 获取父类原型对象副本
+        prototype.constructor = Son // 将获取的副本的constructor指向子类，以此增强副本原型对象
+        Son.prototype = prototype // 将子类的原型对象指向副本原型对象
+    }
+
+
+</script>

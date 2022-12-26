@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+var lengthOfLongestSubstring = function(s) {
+    var maxLangth = 0;
+    var subSequence = '';
+    if (s.length === 0) {
+        return 0;
+    }
+
+    function cb (str) {
+        for (let i = 0; i < s.length; i++) {
+            if (subSequence.indexOf(s[i]) === -1) {
+                subSequence += s[i];
+                if (subSequence.length > maxLangth) {
+                    maxLangth = subSequence.length;
+                }
+            } else {
+                subSequence = '';
+                s = s.slice(1);
+                cb(s);
+            }
+        }
+    }
+    cb(s);
+
+    return maxLangth;
+};
+console.log('lengthOfLongestSubstring', lengthOfLongestSubstring('swsabcdefsafaeaw'))
+</script>

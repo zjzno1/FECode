@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <img id="avatar" src="" alt="">
+</body>
+</html>
+<script>
+function drawAndShareImage(img1, img2, img2x, img2y, imgw, imgh, isRotate){
+  var canvas = document.createElement("canvas");
+  canvas.width = 516;
+  canvas.height = 279;
+  var context = canvas.getContext("2d");
+  context.rect(0 , 0 , canvas.width , canvas.height);
+  context.fillStyle = "rgba(0,0,0,0)";
+  context.fill();
+  var myImage = new Image();
+  myImage.src = img1;  //背景图片 你自己本地的图片或者在线图片
+  myImage.crossOrigin = 'Anonymous';
+  myImage.onload = function(){
+    context.drawImage(myImage , 0 , 0 , 516 , 279);
+    var myImage2 = new Image();
+    myImage2.src = img2;  //你自己本地的图片或者在线图片
+    myImage2.crossOrigin = 'Anonymous';
+    myImage2.onload = function(){
+      if (isRotate) {
+        context.rotate(Math.PI / 12);
+      }
+      context.drawImage(myImage2 , img2x , img2y , imgw , imgh);
+      var base64 = canvas.toDataURL("image/png"); //"image/png" 这里注意一下
+    //   return base64;
+      var img = document.getElementById('avatar');
+      // document.getElementById('avatar').src = base64;
+      img.setAttribute('src' , base64);
+    }
+  }
+}
+drawAndShareImage('http://nfiles3three.autohome.com.cn/sycpkdoc-1/online/1640071391640.png', 'https://x.autoimg.cn/qdty/online/1639992079751.png', 142, 98, 40, 40, true);
+</script>
