@@ -21,3 +21,5 @@ Function.prototype.bind = function (context) {
         return self.apply(context, args);
     }
 }
+
+// https://zhuanlan.zhihu.com/p/85438296

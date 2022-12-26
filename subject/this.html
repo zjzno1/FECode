@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // https://zhuanlan.zhihu.com/p/82504422
+    function foo() { 
+        console.log(this.bar); 
+    } 
+    var bar = "bar1"; 
+    var o2 = {bar: "bar2", foo: foo}; 
+    var o3 = {bar: "bar3", foo: foo}; 
+    foo();            // "bar1" – 默认绑定
+    o2.foo();          // "bar2" – 隐式绑定
+    o3.foo();          // "bar3" – 隐式绑定
+
+    function foo() { 
+        console.log(this.bar); 
+    } 
+    var bar = "bar1"; 
+    var obj = {bar: "bar2"}; 
+
+    foo();          // "bar1"   默认绑定
+    foo.call(obj);     // "bar2"  显式绑定，使用obj作为"this" 
+</script>
