@@ -1,10 +1,3 @@
-function newFn (constructor, ...args) {
-  let tmpObj = Object.create({});
-  tmpObj.__proto__ = constructor.prototype;
-  let res = tmpObj.call(this, ...args);
-  return Object.prototype.toString.call(res) === '[Object object]' ? res : tmpObj;
-}
-
 /**
  * 创建一个新的空的对象
  * 把这个对象链接到原型对象上
@@ -14,6 +7,25 @@ function newFn (constructor, ...args) {
 
 // 绑定优先级
 
+function myNew (constructor) {
+  let obj = Object.create({});
+  obj.__proto__ = constructor.prototype;
+  let res = constructor.apply(obj, Array.from(arguments).slice(1));
+  return Object.prototype.toString.call(res) === '[Object object]' ? res : obj;
+}
+
+function Person(name, age, job) {
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayName = function() {
+     console.log(this.name)
+  }
+}
+
+var person = myNew(Person,'Nicholas', 29, 'Front-end developer'); 
+var person2 = new Person('Nicholas', 29, 'Front-end developer'); 
+console.log('person', person, person2);
 /**
  * 箭头函数
  * 关键字new调
@@ -22,9 +34,9 @@ function newFn (constructor, ...args) {
  * 默认绑定
  */
 
- function foo() { 
-  this.baz = "baz"; 
-  console.log(this.bar + " " + bar); 
-} 
-var baz = new foo(); 
-var bar = "bar"; 
+//  function foo() { 
+//   this.baz = "baz"; 
+//   console.log(this.bar + " " + bar); 
+// } 
+// var baz = new foo(); 
+// var bar = "bar"; 

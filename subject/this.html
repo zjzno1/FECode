@@ -11,9 +11,18 @@
 </body>
 </html>
 <script>
+    /**
+     * 绑定优先级
+     * 1.箭头函数
+     * 2.关键字new调
+     * 3.显式绑定
+     * 4.隐式绑定
+     * 5.默认绑定
+     */
+
     // https://zhuanlan.zhihu.com/p/82504422
     function foo() { 
-        console.log(this.bar); 
+        console.log(this.bar);
     } 
     var bar = "bar1"; 
     var o2 = {bar: "bar2", foo: foo}; 
